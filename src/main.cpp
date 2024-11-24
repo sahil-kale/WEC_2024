@@ -35,7 +35,7 @@ void loop() {
             Serial.print(" Checksum: ");
             Serial.println(decrypted_data.checksum);
             #endif
-		driveMotorCommand(decrypted_data.motor_l_cmd, decrypted_data.motor_r_cmd);
+		driveMotorCommand(decrypted_data.motor_l_cmd, decrypted_data.motor_r_cmd, 100);
 		// servoMotorCommand(decrypted_data.servo_cmd_deg);
     }
 
