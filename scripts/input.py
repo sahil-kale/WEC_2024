@@ -20,7 +20,7 @@ def main(args):
     screen = pygame.display.set_mode((400, 300))
     running = True
 
-    speed = 1
+    speed = 0.4
     servo_angle_muliplier = 15
     servo_angle = 180
 
@@ -56,13 +56,13 @@ def main(args):
                 elif event.key == K_UP:
                     speed += 0.1
                     # clamp speed from 0 to 1
-                    speed = max(0, min(1, speed))
+                    speed = max(0.4, min(1, speed))
                     # scale the speed to the new speed
                     cmd_speed_l = cmd_speed_l / old_speed * speed
                     cmd_speed_r = cmd_speed_r / old_speed * speed
                 elif event.key == K_DOWN:
                     speed -= 0.1
-                    speed = max(0, min(1, speed))
+                    speed = max(0.4, min(1, speed))
                     # scale the speed to the new speed
                     cmd_speed_l = cmd_speed_l / old_speed * speed
                     cmd_speed_r = cmd_speed_r / old_speed * speed
@@ -72,9 +72,8 @@ def main(args):
                 # clamp cmd_speed_l and cmd_speed_r
                 cmd_speed_l = max(-1, min(1, cmd_speed_l))
                 cmd_speed_r = max(-1, min(1, cmd_speed_r))
-            
-                if args.debug:
-                    print(f"Speed: {cmd_speed_l}, {cmd_speed_r}, Servo: {servo_angle}")
+
+                print(f"Speed: {cmd_speed_l}, {cmd_speed_r}, Servo: {servo_angle}")
                 commander.write(cmd_speed_l, cmd_speed_r, servo_angle)
 
                 if args.debug:
