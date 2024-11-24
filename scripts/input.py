@@ -47,11 +47,11 @@ def main(args):
                     cmd_speed_l = 1 * speed
                 elif event.key == K_o:
                     servo_angle += 1 * servo_angle_muliplier
-                    servo_angle = max(0, min(180, servo_angle))
+                    servo_angle = max(105, min(180, servo_angle))
                 elif event.key == K_p:
                     servo_angle -= 1 * servo_angle_muliplier
                     # clamp servo_angle
-                    servo_angle = max(0, min(180, servo_angle))
+                    servo_angle = max(105, min(180, servo_angle))
 
                 elif event.key == K_UP:
                     speed += 0.1
