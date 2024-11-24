@@ -8,7 +8,7 @@
 #define IN4 8
 
 #define LEFT_MOTOR 11
-#define RIGHT_MOTOR 10
+#define RIGHT_MOTOR 5
 #define SERVO_MOTOR 6
 #define MAX_PWM 255
 
@@ -27,6 +27,7 @@ void setupMotors()
     pinMode(LEFT_MOTOR, OUTPUT);
     pinMode(RIGHT_MOTOR, OUTPUT);
     claw.attach(SERVO_MOTOR);
+    claw.writeMicroseconds(MAX_SERVO_PWM);
 }
 
 void driveMotorCommand(float motor_l_cmd, float motor_r_cmd)

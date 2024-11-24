@@ -22,7 +22,7 @@ def main(args):
 
     speed = 1
     servo_angle_muliplier = 15
-    servo_angle = 0
+    servo_angle = 180
 
     cmd_speed_l = 0
     cmd_speed_r = 0
