@@ -1,10 +1,12 @@
 #include <Arduino.h>
 #include "serial_decryption.hpp"
+#include "motors.h"
 
 //#define DEBUG
 
 void setup() {
     Serial.begin(921600);
+	setupMotors();
 }
 
 void loop() {
@@ -33,6 +35,8 @@ void loop() {
             Serial.print(" Checksum: ");
             Serial.println(decrypted_data.checksum);
             #endif
+		driveMotorCommand(decrypted_data.motor_l_cmd, decrypted_data.motor_r_cmd);
+		// servoMotorCommand(decrypted_data.servo_cmd_deg);
     }
 
 }
