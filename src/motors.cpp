@@ -43,7 +43,7 @@ void driveMotorCommand(float motor_l_cmd, float motor_r_cmd)
         digitalWrite(IN2, LOW);
     }
 
-    if(motor_r_cmd > 0)
+    if(motor_r_cmd < 0)
     {
         digitalWrite(IN3, LOW);
         digitalWrite(IN4, HIGH);

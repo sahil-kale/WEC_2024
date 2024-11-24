@@ -55,6 +55,8 @@ class SerialCommander:
         packed_data_with_checksum = packed_data + struct.pack('<I', checksum)
 
         # Write the data
+        if self.debug:
+            print(f"Writing speeds: {motor_l_cmd}, {motor_r_cmd}, servo angle: {servo_cmd_deg}")
         self.write_raw(packed_data_with_checksum)
 
     def read_serial_output(self):

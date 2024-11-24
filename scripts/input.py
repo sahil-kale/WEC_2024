@@ -1,6 +1,7 @@
 import pygame
 import argparse
 from pygame.locals import *
+import time
 from serial_talker import SerialCommander
 
 def main(args):
@@ -61,7 +62,11 @@ def main(args):
             
                 if args.debug:
                     print(f"Speed: {cmd_speed_l}, {cmd_speed_r}, Servo: {servo_angle}")
-                commander.write(speed, speed, servo_angle)
+                commander.write(cmd_speed_l, cmd_speed_r, servo_angle)
+
+                if args.debug:
+                    time.sleep(0.1)
+                    commander.read_serial_output()
 
     pygame.quit()
 
