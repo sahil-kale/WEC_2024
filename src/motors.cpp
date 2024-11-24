@@ -29,7 +29,7 @@ void setupMotors()
     claw.attach(SERVO_MOTOR);
 }
 
-void driveMotorCommand(float motor_l_cmd, float motor_r_cmd, uint8_t delay_ms)
+void driveMotorCommand(float motor_l_cmd, float motor_r_cmd)
 {
     // motor commands between -1 and 1 (inclusive)
     if(motor_l_cmd > 0)
@@ -56,13 +56,6 @@ void driveMotorCommand(float motor_l_cmd, float motor_r_cmd, uint8_t delay_ms)
 
     analogWrite(LEFT_MOTOR, fabs(motor_l_cmd)*MAX_PWM);
     analogWrite(RIGHT_MOTOR, fabs(motor_r_cmd)*MAX_PWM);
-    if(delay_ms > 0)
-    {
-        delay(delay_ms);
-        analogWrite(LEFT_MOTOR, 0);
-        analogWrite(RIGHT_MOTOR, 0);
-        delay(delay_ms);
-    }
 }
 
 void servoMotorCommand(uint16_t angle)
