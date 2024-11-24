@@ -20,7 +20,7 @@ def main(args):
     screen = pygame.display.set_mode((400, 300))
     running = True
 
-    speed = 0.1
+    speed = 1
     servo_angle_muliplier = 15
     servo_angle = 0
 
@@ -44,21 +44,30 @@ def main(args):
                     cmd_speed_l = -1 * speed
                 elif event.key == K_d:
                     cmd_speed_r = -1 * speed
-                    cmd_speed_l = -1 * speed
+                    cmd_speed_l = 1 * speed
                 elif event.key == K_p:
                     servo_angle += 1 * servo_angle_muliplier
                 elif event.key == K_o:
                     servo_angle -= 1 * servo_angle_muliplier
                 elif event.key == K_UP:
                     speed += 0.1
+                    # clamp speed from 0 to 1
+                    speed = max(0, min(1, speed))
                     # scale the speed to the new speed
                     cmd_speed_l = cmd_speed_l / old_speed * speed
                     cmd_speed_r = cmd_speed_r / old_speed * speed
                 elif event.key == K_DOWN:
                     speed -= 0.1
+                    speed = max(0, min(1, speed))
                     # scale the speed to the new speed
                     cmd_speed_l = cmd_speed_l / old_speed * speed
                     cmd_speed_r = cmd_speed_r / old_speed * speed
+
+    
+
+                # clamp cmd_speed_l and cmd_speed_r
+                cmd_speed_l = max(-1, min(1, cmd_speed_l))
+                cmd_speed_r = max(-1, min(1, cmd_speed_r))
             
                 if args.debug:
                     print(f"Speed: {cmd_speed_l}, {cmd_speed_r}, Servo: {servo_angle}")
@@ -67,6 +76,14 @@ def main(args):
                 if args.debug:
                     time.sleep(0.1)
                     commander.read_serial_output()
+            elif event.type == KEYUP:
+                if event.key == K_w or event.key == K_a or event.key == K_s or event.key == K_d:
+                    cmd_speed_l = 0
+                    cmd_speed_r = 0
+                    commander.write(cmd_speed_l, cmd_speed_r, servo_angle)
+                    if args.debug:
+                        time.sleep(0.1)
+                        commander.read_serial_output()
 
     pygame.quit()
 

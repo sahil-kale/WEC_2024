@@ -2,7 +2,7 @@
 #include "serial_decryption.hpp"
 #include "motors.h"
 
-#define DEBUG
+//#define DEBUG
 
 void setup() {
     Serial.begin(921600);
